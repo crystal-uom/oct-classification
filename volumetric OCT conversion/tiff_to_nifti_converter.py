@@ -8,14 +8,14 @@ import numpy as np
 input_path = "D:/VIP Cup/Dataset/ICIP training data/0/RawDataQA (32)/"
 output_path= "D:/VIP Cup/test_0_32.nii.gz"
 vip_dataset = "D:/VIP Cup/Dataset/ICIP training data/"
-output_dataset = "D:/VIP Cup/ICIP data"
+output_dataset = "D:/VIP Cup/Output dataset/ICIP data/"
 
 converted_nifti_count = 0
 
 def is_tiff_dir(curr_path):
     '''function to check if the current directory having any tiff files'''
-    num_dcm = len(glob.glob(os.path.join(curr_path, '*.tiff')))
-    return num_dcm>0
+    num_tiff = len(glob.glob(os.path.join(curr_path, '*.tiff')))
+    return num_tiff>0
 
 def convert_tiff_dir_to_nifti(input_dir, output_path, stack_axis=2):
     '''
@@ -32,7 +32,7 @@ def convert_tiff_dir_to_nifti(input_dir, output_path, stack_axis=2):
 
         if not oct_images:
             raise ValueError(f'img_dir ({input_dir}) does not contain any .tif or .tiff images.')
-        
+    
         imgs = []
         for oct_image in oct_images:
             #print(oct_image)
