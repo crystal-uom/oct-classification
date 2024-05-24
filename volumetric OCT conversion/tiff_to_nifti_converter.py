@@ -8,6 +8,7 @@ import numpy as np
 input_path = "D:/VIP Cup/Dataset/ICIP training data/0/RawDataQA (32)/"
 output_path= "D:/VIP Cup/test_0_32.nii.gz"
 vip_dataset = "D:/VIP Cup/Dataset/ICIP training data/"
+denoised_dataset = "D:/VIP Cup/Output dataset/denoised_tiff_data/"
 output_dataset = "D:/VIP Cup/Output dataset/ICIP data/"
 
 converted_nifti_count = 0
@@ -59,7 +60,7 @@ def out_path(in_path):
 
 if __name__ == "__main__":
 
-    dataset = glob.iglob(os.path.join(vip_dataset, '**'), recursive=True)
+    dataset = glob.iglob(os.path.join(denoised_dataset, '**'), recursive=True)
 
     for i,file in enumerate(dataset):
         if is_tiff_dir(file):
