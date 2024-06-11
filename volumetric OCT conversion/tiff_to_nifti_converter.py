@@ -9,7 +9,7 @@ input_path = "D:/VIP Cup/Dataset/ICIP training data/0/RawDataQA (32)/"
 output_path= "D:/VIP Cup/test_0_32.nii.gz"
 vip_dataset = "D:/VIP Cup/Dataset/ICIP training data/"
 denoised_dataset = "D:/VIP Cup/Output dataset/denoised_tiff_data/"
-output_dataset = "D:/VIP Cup/Output dataset/ICIP data/"
+output_dataset = "D:/VIP Cup/Output dataset/denoised_nifti_dataset/"
 
 converted_nifti_count = 0
 
@@ -39,9 +39,10 @@ def convert_tiff_dir_to_nifti(input_dir, output_path, stack_axis=2):
             #print(oct_image)
             
             img = np.asarray(Image.open(oct_image)).astype(np.float32).squeeze()
-            if img.ndim != 2:
+            if img.ndim != 3:
                 raise Exception(f'Only 2D data supported. File {oct_image} has dimension {img.ndim}.')
-            imgs.append(img)
+            else:
+                imgs.append(img)
 
         img = np.stack(imgs, stack_axis)
         nib.Nifti1Image(img,None).to_filename(output_path)
@@ -72,7 +73,7 @@ if __name__ == "__main__":
 
             #converting tiff directory to nifti
             try:
-                convert_tiff_dir_to_nifti(file, dest_file, stack_axis=2)
+                convert_tiff_dir_to_nifti(file, dest_file, stack_axis=3)
                 converted_nifti_count += 1
                 print(f"Succesfully converted total files: {converted_nifti_count}")
 
